@@ -77,6 +77,7 @@
             </div>
             <button class="theme-btn" id="themeToggle" onclick="cycleTheme()" aria-label="Theme"><span class="theme-icon" id="themeIcon">&#x1F3E5;</span></button>
             <button class="help-btn" id="helpBtn" onclick="toggleHelp()" title="Help" aria-label="Help" aria-expanded="false">?</button>
+            <button class="narrator-btn" id="narratorMainBtn" onclick="narratorTogglePanel()" aria-label="Narrator">&#127911;</button>
             <button class="reading-mode-btn" id="readingModeBtn" onclick="toggleReadingMode()" title="Reading Mode" aria-label="Reading Mode">&#128214;</button>
         </nav>
     </div>
@@ -136,6 +137,78 @@
 
 <noscript><p style="text-align:center;padding:40px 20px;font-size:1.1rem;color:#666">This app requires JavaScript. يتطلب هذا التطبيق JavaScript.</p></noscript>
 
+<!-- Narrator Panel -->
+<div id="narratorPanel" class="narrator-panel hidden">
+  <div class="narrator-header">
+    <span class="narrator-title" id="narratorTitle">&#127911; Narrator</span>
+    <button onclick="narratorTogglePanel()" class="panel-close-btn">&#10005;</button>
+  </div>
+  <div class="narrator-body">
+    <!-- Mode buttons -->
+    <div class="narrator-modes">
+      <button class="narrator-mode-btn" onclick="narratorPlayPage()">
+        <span>&#9654;&#65039;</span> <span class="narrator-mode-label" data-nr="page">Read this page</span>
+      </button>
+      <button class="narrator-mode-btn" onclick="narratorPlayBook()">
+        <span>&#128214;</span> <span class="narrator-mode-label" data-nr="book">Read as a book</span>
+      </button>
+    </div>
+    <!-- Transport controls -->
+    <div class="narrator-controls">
+      <button class="narrator-ctrl" onclick="narratorPrev()">&#9198;&#65039;</button>
+      <button class="narrator-ctrl narrator-ctrl-main" id="narratorPlayPause" onclick="narratorPause()">&#9654;&#65039;</button>
+      <button class="narrator-ctrl" onclick="narratorNext()">&#9197;&#65039;</button>
+      <button class="narrator-ctrl" onclick="narratorStop()">&#9209;&#65039;</button>
+    </div>
+    <!-- Progress -->
+    <div class="narrator-progress-wrap">
+      <div class="narrator-bar-bg"><div class="narrator-bar-fill" id="narratorBar"></div></div>
+      <span class="narrator-progress-text" id="narratorProgress">0/0</span>
+    </div>
+    <!-- Settings -->
+    <div class="narrator-settings">
+      <div class="narrator-setting">
+        <label data-nr="voice">Voice</label>
+        <select id="narratorVoice" onchange="narratorVoiceChange(this.value)" onfocus="narratorPopulateVoices()"></select>
+      </div>
+      <div class="narrator-setting">
+        <label data-nr="speed">Speed</label>
+        <input type="range" id="narratorSpeed" min="0.5" max="2" step="0.25" value="1" oninput="narratorSpeedChange(this.value)">
+        <span id="narratorSpeedLabel">1x</span>
+      </div>
+      <div class="narrator-setting">
+        <label data-nr="pitch">Pitch</label>
+        <input type="range" id="narratorPitch" min="0.5" max="1.5" step="0.1" value="1" oninput="narratorPitchChange(this.value)">
+        <span id="narratorPitchLabel">1.0</span>
+      </div>
+      <div class="narrator-setting">
+        <label data-nr="loop">Loop card</label>
+        <select id="narratorLoop" onchange="narratorLoopChange(this.value)">
+          <option value="0" data-nr="off">Off</option>
+          <option value="2">2x</option>
+          <option value="3">3x</option>
+          <option value="5">5x</option>
+          <option value="10">10x</option>
+        </select>
+      </div>
+      <div class="narrator-setting">
+        <label data-nr="sleep">Sleep timer</label>
+        <select id="narratorSleep" onchange="narratorSleepChange(this.value)">
+          <option value="0" data-nr="off">Off</option>
+          <option value="5">5 min</option>
+          <option value="15">15 min</option>
+          <option value="30">30 min</option>
+        </select>
+      </div>
+      <div class="narrator-toggles">
+        <label class="narrator-toggle"><input type="checkbox" checked onchange="narratorKaraokeToggle(this.checked)"> <span data-nr="karaoke">Karaoke</span></label>
+        <label class="narrator-toggle"><input type="checkbox" checked onchange="narratorAutoScrollToggle(this.checked)"> <span data-nr="autoscroll">Auto-scroll</span></label>
+        <label class="narrator-toggle"><input type="checkbox" onchange="narratorDuoToggle(this.checked)"> <span data-nr="duo">Duo (AR+FR)</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Bottom Tabs -->
 <nav class="tabs" id="mainTabs" role="tablist">
   <div class="tabs-meta">
@@ -153,6 +226,7 @@
 </nav>
 
 <script src="app.js"></script>
+<script src="narrator.js"></script>
 <script src="genius.js"></script><script>document.addEventListener('DOMContentLoaded',function(){if(window.geniusInit)geniusInit({particles:{color1:'rgba(0,150,136,0.15)',color2:'rgba(67,160,71,0.12)',count:18},appKey:'ummahClinic',darkTheme:'night'})});</script>
 </body>
 </html>
