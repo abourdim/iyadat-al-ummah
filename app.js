@@ -30,7 +30,7 @@ const T = {
   tabAilments: { ar: 'العلل', en: 'Ailments', fr: 'Maux' },
   tabRemedies: { ar: 'الأدوية', en: 'Remedies', fr: 'Remedes' },
   tabQuiz: { ar: 'تشخيص', en: 'Diagnosis', fr: 'Diagnostic' },
-  tabAbout: { ar: 'عن الكتاب', en: 'About', fr: 'A propos' },
+  tabAbout: { ar: 'الكتاب', en: 'Book', fr: 'Livre' },
 
   // Themes
   themeNames: {
