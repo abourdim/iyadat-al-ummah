@@ -294,7 +294,7 @@
 
     var l = getLang();
     var utt = new SpeechSynthesisUtterance(text);
-    utt.voice = getVoiceForLang(l);
+    var selectedVoice = getVoiceForLang(l); if (selectedVoice) utt.voice = selectedVoice;
     utt.lang = l === 'ar' ? 'ar-SA' : l === 'fr' ? 'fr-FR' : 'en-US';
     utt.rate = (l === 'ar') ? STATE.speed * 0.9 : STATE.speed;
     utt.pitch = STATE.pitch;
@@ -866,7 +866,7 @@
 
     var l = getLang();
     var utt = new SpeechSynthesisUtterance(text);
-    utt.voice = getVoiceForLang(l);
+    var selectedVoice = getVoiceForLang(l); if (selectedVoice) utt.voice = selectedVoice;
     utt.lang = l === 'ar' ? 'ar-SA' : l === 'fr' ? 'fr-FR' : 'en-US';
     utt.rate = (l === 'ar') ? STATE.speed * 0.9 : STATE.speed;
     utt.pitch = STATE.pitch;
