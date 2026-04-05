@@ -1107,7 +1107,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─── SPLASH ───
 function initSplash() {
   const splash = document.getElementById('splash');
+  if (!splash) return;
   const countEl = document.getElementById('splashCount');
+  if (!countEl) return;
   let count = 5;
   const timer = setInterval(() => {
     count--;
@@ -1119,6 +1121,7 @@ function initSplash() {
 
 function dismissSplash() {
   const splash = document.getElementById('splash');
+  if (!splash) return;
   if (!splash || splash.classList.contains('bye')) return;
   if (splash._timer) clearInterval(splash._timer);
   splash.classList.add('bye');
@@ -1151,7 +1154,9 @@ function applyLang(lang) {
   { const _e=document.getElementById('tabAbout'); if(_e) _e.textContent=T.tabAbout[lang]; }
 
   const splashTitle = document.getElementById('splashTitle');
+  if (!splashTitle) return;
   const splashHint = document.getElementById('splashHint');
+  if (!splashHint) return;
   if (splashTitle) splashTitle.textContent = T.appTitle[lang];
   if (splashHint) splashHint.textContent = T.splashHint[lang];
 
@@ -1183,6 +1188,7 @@ function cycleTheme() {
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const icon = document.getElementById('themeIcon');
+  if (!icon) return;
   if (icon) icon.textContent = T.themeIcons[theme] || '\u{1F3E5}';
   const colors = { clinic: '#009688', night: '#111d1b', healing: '#43A047' };
   const meta = document.querySelector('meta[name="theme-color"]');
@@ -1223,6 +1229,7 @@ function switchTab(tabName) {
 // ─── SCROLL TO TOP ───
 function initScrollTop() {
   const btn = document.getElementById('scrollTop');
+  if (!btn) return;
   window.addEventListener('scroll', () => {
     btn.classList.toggle('visible', window.scrollY > 300);
   });
@@ -1273,7 +1280,9 @@ function shareCard(text) {
 function updateBlindSlider(val) {
   const lang = currentLang;
   const stateEl = document.getElementById('blindSliderState');
+  if (!stateEl) return;
   const visualEl = document.getElementById('blindSliderVisual');
+  if (!visualEl) return;
   if (!stateEl || !visualEl) return;
   val = parseInt(val);
   let stateText, opacity, hue;
@@ -1299,6 +1308,7 @@ function updateBlindSlider(val) {
 function renderHome() {
   const lang = currentLang;
   const panel = document.getElementById('panel-home');
+  if (!panel) return;
   const totalAilments = ailmentsData.length;
   const totalRemedies = Object.values(remediesData).reduce((s,a) => s + a.length, 0);
   const daily = getDailyPrescription();
@@ -1499,6 +1509,7 @@ let quizAnswers = {};
 function renderQuiz() {
   const lang = currentLang;
   const panel = document.getElementById('panel-quiz');
+  if (!panel) return;
 
   const saved = JSON.parse(localStorage.getItem('ummahClinicQuiz') || 'null');
   if (saved && saved.completed) {
@@ -1538,6 +1549,7 @@ function startQuiz() {
 function renderQuizQuestion() {
   const lang = currentLang;
   const body = document.getElementById('quizBody');
+  if (!body) return;
   const q = quizQuestions[quizCurrent];
   const total = quizQuestions.length;
   const progress = ((quizCurrent) / total) * 100;
@@ -1679,6 +1691,7 @@ function resetQuiz() {
 function renderAbout() {
   const lang = currentLang;
   const panel = document.getElementById('panel-about');
+  if (!panel) return;
 
   panel.innerHTML = `
     <div class="about-section">
@@ -1712,6 +1725,7 @@ function renderAbout() {
 function renderDuaPanel() {
   const lang = currentLang;
   const container = document.getElementById('duaPanelContent');
+  if (!container) return;
   container.innerHTML = duas.map(d => `
     <div class="dua-item">
       <div class="dua-ar">${d.ar}</div>
@@ -1802,6 +1816,7 @@ function toggleCard(id) {
 
 function toggleHelp() {
   const panel = document.getElementById('helpPanel');
+  if (!panel) return;
   panel.classList.toggle('hidden');
   const btn = document.getElementById('helpBtn');
   if (btn) btn.setAttribute('aria-expanded', !panel.classList.contains('hidden'));
@@ -1810,6 +1825,7 @@ function toggleHelp() {
 
 function toggleDuaPanel() {
   const panel = document.getElementById('duaPanel');
+  if (!panel) return;
   panel.classList.toggle('hidden');
   const btn = document.getElementById('duaBtn');
   if (btn) btn.setAttribute('aria-expanded', !panel.classList.contains('hidden'));
@@ -1819,7 +1835,9 @@ function toggleDuaPanel() {
 // ─── TOAST ───
 function showToast(msg) {
   const toast = document.getElementById('toastIndicator');
+  if (!toast) return;
   const text = document.getElementById('toastMessage');
+  if (!text) return;
   text.textContent = msg;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2500);
