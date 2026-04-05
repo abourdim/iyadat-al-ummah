@@ -1144,11 +1144,11 @@ function applyLang(lang) {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
 
-  document.getElementById('tabHome').textContent = T.tabHome[lang];
-  document.getElementById('tabAilments').textContent = T.tabAilments[lang];
-  document.getElementById('tabRemedies').textContent = T.tabRemedies[lang];
-  document.getElementById('tabQuiz').textContent = T.tabQuiz[lang];
-  document.getElementById('tabAbout').textContent = T.tabAbout[lang];
+  { const _e=document.getElementById('tabHome'); if(_e) _e.textContent=T.tabHome[lang]; }
+  { const _e=document.getElementById('tabAilments'); if(_e) _e.textContent=T.tabAilments[lang]; }
+  { const _e=document.getElementById('tabRemedies'); if(_e) _e.textContent=T.tabRemedies[lang]; }
+  { const _e=document.getElementById('tabQuiz'); if(_e) _e.textContent=T.tabQuiz[lang]; }
+  { const _e=document.getElementById('tabAbout'); if(_e) _e.textContent=T.tabAbout[lang]; }
 
   const splashTitle = document.getElementById('splashTitle');
   const splashHint = document.getElementById('splashHint');
@@ -1156,8 +1156,8 @@ function applyLang(lang) {
   if (splashHint) splashHint.textContent = T.splashHint[lang];
 
 
-  document.getElementById('logoTitle').textContent = T.appTitle[lang];
-  document.getElementById('duaPanelTitle').textContent = '\u{1F932} ' + T.duaTitle[lang];
+  { const _e=document.getElementById('logoTitle'); if(_e) _e.textContent=T.appTitle[lang]; }
+  { const _e=document.getElementById('duaPanelTitle'); if(_e) _e.textContent='\u{1F932} ' + T.duaTitle[lang]; }
 
   renderHome();
   renderAilments();
@@ -1214,6 +1214,10 @@ function switchTab(tabName) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   playSound('click');
   setTimeout(initScrollReveal, 100);
+  // Auto-render quiz when switching to quiz tab
+  if (name === 'quiz' && document.getElementById('quizContainer') && !document.getElementById('quizContainer').innerHTML.trim()) {
+    renderQuiz();
+  }
 }
 
 // ─── SCROLL TO TOP ───
@@ -1721,7 +1725,7 @@ function renderDuaPanel() {
 function renderHelpPanel() {
   const lang = currentLang;
   const body = document.getElementById('helpBody');
-  document.getElementById('helpTitle').textContent = '\u2753 ' + T.helpTitle[lang];
+  { const _e=document.getElementById('helpTitle'); if(_e) _e.textContent='\u2753 ' + T.helpTitle[lang]; }
 
   const content = {
     ar: `
