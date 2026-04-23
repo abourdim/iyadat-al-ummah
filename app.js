@@ -1712,6 +1712,7 @@ function renderAbout() {
 function renderDuaPanel() {
   const lang = currentLang;
   const container = document.getElementById('duaPanelContent');
+  if (!container) return;
   container.innerHTML = duas.map(d => `
     <div class="dua-item">
       <div class="dua-ar">${d.ar}</div>
