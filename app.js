@@ -1817,6 +1817,28 @@ function toggleDuaPanel() {
   playSound('click');
 }
 
+function toggleReadingMode() {
+  const isActive = document.body.classList.toggle('reading-mode');
+  if (isActive) {
+    const exitBtn = document.createElement('button');
+    exitBtn.className = 'reading-exit';
+    exitBtn.id = 'readingExitBtn';
+    exitBtn.innerHTML = '&#10005;';
+    exitBtn.onclick = toggleReadingMode;
+    document.body.appendChild(exitBtn);
+  } else {
+    const exitBtn = document.getElementById('readingExitBtn');
+    if (exitBtn) exitBtn.remove();
+  }
+  playSound('click');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.classList.contains('reading-mode')) {
+    toggleReadingMode();
+  }
+});
+
 // ─── TOAST ───
 function showToast(msg) {
   const toast = document.getElementById('toastIndicator');
